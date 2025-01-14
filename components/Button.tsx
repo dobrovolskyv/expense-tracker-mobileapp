@@ -21,14 +21,17 @@ export default function Button({
     }
     return (
         <TouchableOpacity onPress={onPress} style={[styles.button, style]}>
-            {children}
+            <Text>
+                {children}
+
+            </Text>
         </TouchableOpacity>
     )
 }
 
 const styles = StyleSheet.create({
     button: {
-    
+
         backgroundColor: colors.primary,
         borderRadius: radius._17,
         borderCurve: 'continuous',

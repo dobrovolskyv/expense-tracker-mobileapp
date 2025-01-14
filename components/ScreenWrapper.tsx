@@ -18,7 +18,10 @@ export default function ScreenWrapper({ style, children }: ScreenWrapperProps) {
             style]} >
 
             <StatusBar barStyle='light-content' />
-            {children}
+   
+
+                {children}
+         
         </View>
     )
 }

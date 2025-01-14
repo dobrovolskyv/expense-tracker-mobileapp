@@ -6,14 +6,16 @@ import { verticalScale } from '@/utils/styling'
 import { colors, spacingX, spacingY } from '@/constants/theme'
 import Button from '@/components/Button'
 import Animated, { FadeIn, FadeInDown } from "react-native-reanimated";
+import { useRouter } from 'expo-router'
 
 const welcome = () => {
+    const router = useRouter()
     return (
         <ScreenWrapper>
             <View style={styles.container}>
                 //login button,image
                 <View>
-                    <TouchableOpacity style={styles.loginButton}>
+                    <TouchableOpacity style={styles.loginButton} onPress={() => router.push('/(auth)/login') }>
                         <Typograph fontWeight={500}>Вход</Typograph>
                     </TouchableOpacity>
 
@@ -29,17 +31,17 @@ const welcome = () => {
 
                 <View style={styles.footer}>
                     <Animated.View entering={FadeInDown.duration(1000).springify().damping(12)} style={{ alignItems: 'center' }}>
-                        <Typograph size={30} fontWeight={"800"}>Всегда контролируй</Typograph>
+                        <Typograph size={30} fontWeight={"800"}>Возьми под контроль</Typograph>
                         <Typograph size={30} fontWeight={"800"}>свои финансы</Typograph>
                     </Animated.View>
 
                     <Animated.View entering={FadeInDown.duration(1000).delay(100).springify().damping(12)} style={{ alignItems: 'center' }}>
-                        <Typograph size={17} color={colors.textLight}>Всегда контролируй</Typograph>
-                        <Typograph size={17} color={colors.textLight}>свои финансы</Typograph>
+                        <Typograph size={17} color={colors.textLight}>Финансы должны быть упорядочены</Typograph>
+                        <Typograph size={17} color={colors.textLight}>чтобы быть уверенным в будущем</Typograph>
                     </Animated.View>
 
                     <Animated.View entering={FadeInDown.duration(1000).delay(200).springify().damping(12)} style={styles.buttonContainer}>
-                        <Button>
+                        <Button onPress={() => router.push('/register')}>
                             <Typograph size={22} color={colors.neutral900} fontWeight={"600"}>Начать</Typograph>
                         </Button>
                     </Animated.View>
@@ -56,7 +58,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        paddingTop: spacingY._7
+        paddingTop: spacingY._5
     },
     welcomeImage: {
         width: '100%',
@@ -69,10 +71,10 @@ const styles = StyleSheet.create({
         marginRight: spacingX._20
     },
     footer: {
+        flex: 1,
         backgroundColor: colors.neutral900,
         alignItems: 'center',
-        paddingTop: verticalScale(30),
-        paddingBottom: verticalScale(45),
+        paddingTop: verticalScale(45),
         gap: spacingY._20,
         shadowColor: "white",
         shadowOffset: {

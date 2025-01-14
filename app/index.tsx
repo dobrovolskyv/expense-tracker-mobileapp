@@ -5,18 +5,18 @@ import { useRouter } from 'expo-router'
 
 const index = () => {
     const router = useRouter()
-    
-    useEffect(()=>{
-        setTimeout(()=>{
+
+    useEffect(() => {
+        setTimeout(() => {
             router.push('/welcome')
         }, 2000)
-    },[])
+    }, [])
     return (
         <View style={styles.container}>
             <Image
-            style={styles.logo}
-            resizeMode="contain"
-            source={require("../assets/images/splashImage.png")}
+                style={styles.logo}
+                resizeMode="contain"
+                source={require("../assets/images/splashImage.png")}
             />
         </View>
     )
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: colors.neutral900
     },
-    logo:{
+    logo: {
         height: "20%",
         aspectRatio: 1
     }
