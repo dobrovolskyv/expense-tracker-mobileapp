@@ -9,38 +9,26 @@ import Input from '@/components/Input'
 import * as Icons from 'phosphor-react-native'
 import Button from '@/components/Button'
 import { useRouter } from 'expo-router'
-import {useAuth} from "@/contexts/authContext";
 
-const Register = () => {
+const Login = () => {
 
     const emailRef = useRef('')
     const passwordRef = useRef('')
-    const nameRef = useRef('')
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setLoading] = useState(false)
     const router = useRouter()
-    const {register: registerUser} =  useAuth()
 
 
     const handleSubmit = async () => {
-        if (!emailRef.current || !passwordRef.current || !nameRef.current) {
-            Alert.alert('Заполните все поля, чтобы зарегестрироваться')
+        if(!emailRef.current || !passwordRef.current) {
+            Alert.alert('Заполните все поля')
             return
         }
 
-        setIsLoading(true)
-
-        const res = await registerUser(
-            emailRef.current,
-            passwordRef.current,
-            nameRef.current,
-        )
-
-        setIsLoading(false)
-        console.log("register result", res)
-        if(!res.success) {
-            Alert.alert('sign in', res.msg)
-        }
-
+        console.log("email",emailRef.current);
+        console.log("password",passwordRef.current);
+        console.log("login success");
+        
+        
     }
     return (
         <ScreenWrapper>
@@ -49,21 +37,16 @@ const Register = () => {
 
                 <View style={{ gap: 5, marginTop: spacingY._20 }}>
                     <Typograph size={30} fontWeight={"800"}>
-                        Давайте
+                        Привет,
                     </Typograph>
                     <Typograph size={30} fontWeight={"800"}>
-                        Начнем!
+                        С возвращением!
                     </Typograph>
 
                     {/* форма */}
                     <View style={styles.form}>
-                        <Typograph size={16} color={colors.textLighter}>Создайте аккаунт, чтобы отслеживать свои финансы</Typograph>
+                        <Typograph size={16} color={colors.textLighter}>Зайди сейчас, чтобы отслеживать свои финансы</Typograph>
 
-                        <Input
-                            placeholder='Введите ваше имя'
-                            onChangeText={(value) => (nameRef.current = value)}
-                        // icon={<Icons.At size={verticalScale(20)} color={colors.neutral300} weight='fill'/>}
-                        />
                         <Input
                             placeholder='Введите ваш email'
                             onChangeText={(value) => (emailRef.current = value)}
@@ -77,9 +60,12 @@ const Register = () => {
                         // icon={<Icons.At size={verticalScale(20)} color={colors.neutral300} weight='fill'/>}
                         />
 
+                        <Typograph size={14} color={colors.text} style={{ alignSelf: 'flex-end' }}>
+                            Забылим пароль?
+                        </Typograph>
 
                         <Button onPress={handleSubmit} loading={isLoading}>
-                            <Typograph fontWeight={'700'} color={colors.black} size={21}>Зарегестрироваться</Typograph>
+                            <Typograph fontWeight={'700'} color={colors.black} size={21}>Войти</Typograph>
                         </Button>
                     </View>
 
@@ -87,9 +73,9 @@ const Register = () => {
 
                     {/* footer */}
                     <View style={styles.footer}>
-                        <Typograph size={15}>У вас уже есть аккаунт?</Typograph>
-                        <Pressable onPress={() => router.push('/(auth)/login')}>
-                            <Typograph size={15} fontWeight={'700'} color={colors.primary}>Войти в аккаунт</Typograph>
+                        <Typograph size={15}>У вас нет аккаутна?</Typograph>
+                        <Pressable onPress={() => router.navigate('/(auth)/register')}>
+                            <Typograph size={15} fontWeight={'700'} color={colors.primary}>Регистрация</Typograph>
                         </Pressable>
                     </View>
                 </View>
@@ -98,7 +84,7 @@ const Register = () => {
     )
 }
 
-export default Register
+export default Login
 
 const styles = StyleSheet.create({
     container: {
@@ -107,7 +93,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: spacingY._20
     },
     form: {
-        gap: spacingY._30
+        gap: spacingY._20
     },
     forgotPassword: {
         textAlign: 'right',
@@ -118,7 +104,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        gap: 8
+        gap: 5
     },
     footerText: {
         textAlign: 'center',
