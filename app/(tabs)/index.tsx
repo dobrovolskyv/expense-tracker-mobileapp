@@ -5,6 +5,7 @@ import Typograph from '@/components/Typograph'
 import { colors } from '@/constants/theme'
 import { signOut } from 'firebase/auth'
 import { auth } from '@/config/firebase'
+import ScreenWrapper from '@/components/ScreenWrapper'
 
 const Home = () => {
 
@@ -13,12 +14,12 @@ const Home = () => {
     }
 
     return (
-        <View>
-            <Text>Home</Text>
+        <ScreenWrapper>
+            <Typograph>Home</Typograph>
             <Button onPress={handleLogout}>
                 <Typograph color={colors.black}>Выход</Typograph>
             </Button>
-        </View>
+        </ScreenWrapper>
     )
 }
 
