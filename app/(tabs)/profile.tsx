@@ -3,11 +3,14 @@ import React from 'react'
 import ScreenWrapper from '@/components/ScreenWrapper'
 import { verticalScale } from '@/utils/styling'
 import { colors, radius, spacingX, spacingY } from '@/constants/theme'
+import Header from '@/components/Header'
 
 const Profile = () => {
   return (
     <ScreenWrapper>
-      <Text>Profile</Text>
+      <View style={styles.container}>
+        <Header />
+      </View>
     </ScreenWrapper>
   )
 }
@@ -19,16 +22,16 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: spacingX._20
   },
-  userInfo:{
+  userInfo: {
     marginTop: verticalScale(30),
     alignItems: 'center',
     gap: spacingY._15
   },
-  avatarContainer:{
+  avatarContainer: {
     position: 'relative',
     alignSelf: 'center'
   },
-  avatar:{
+  avatar: {
     alignSelf: 'center',
     backgroundColor: colors.neutral300,
     height: verticalScale(135),
@@ -37,14 +40,14 @@ const styles = StyleSheet.create({
     // overflow: 'hidden',
     // position: 'relative'
   },
-  editIcon:{
+  editIcon: {
     position: 'absolute',
     bottom: 5,
     right: 8,
     borderRadius: 50,
     backgroundColor: colors.neutral100,
     shadowColor: colors.black,
-    shadowOffset:{
+    shadowOffset: {
       width: 0,
       height: 0
     },
@@ -53,11 +56,11 @@ const styles = StyleSheet.create({
     elevation: 4,
     padding: 5
   },
-  nameContainer:{
+  nameContainer: {
     gap: verticalScale(4),
     alignItems: 'center'
   },
-  listIcon:{
+  listIcon: {
     height: verticalScale(44),
     width: verticalScale(44),
     backgroundColor: colors.neutral500,
