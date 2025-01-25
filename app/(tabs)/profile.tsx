@@ -5,11 +5,38 @@ import { verticalScale } from '@/utils/styling'
 import { colors, radius, spacingX, spacingY } from '@/constants/theme'
 import Header from '@/components/Header'
 
+import AntDesign from '@expo/vector-icons/AntDesign';
+import Typograph from '@/components/Typograph'
+import { useAuth } from '@/contexts/authContext'
+
+import { Image } from "expo-image"
+
 const Profile = () => {
+  const { user } = useAuth()
+
   return (
     <ScreenWrapper>
       <View style={styles.container}>
-        <Header />
+        <Header title='Профиль'
+          style={{ marginVertical: spacingY._10 }}
+          leftIcon={< AntDesign name="arrowleft" size={24} color="black" />} />
+
+        {/* userinfo */}
+        <View style={styles.userInfo}>
+          {/* avatar */}
+          <View>
+            {/* user image */}
+            <Image source={user?.image}
+              style={styles.avatar}
+              contentFit='cover'
+              transition={100} />
+          </View>
+          {/* email & name */}
+          <View style={styles.nameContainer}>
+            <Typograph size={24} fontWeight={"600"} color={colors.neutral100}>{user?.name}</Typograph>
+            <Typograph size={15} color={colors.neutral400}>{user?.email}</Typograph>
+          </View>
+        </View>
       </View>
     </ScreenWrapper>
   )
