@@ -15,9 +15,11 @@ import { accountOptionType } from '@/types'
 import Animated, { FadeIn } from 'react-native-reanimated'
 import { signOut } from 'firebase/auth'
 import { auth } from '@/config/firebase'
+import { useRouter } from 'expo-router'
 
 const Profile = () => {
   const { user } = useAuth()
+  const router = useRouter()
 
 
   const accountOptions: accountOptionType[] = [
@@ -70,6 +72,8 @@ const Profile = () => {
     if (item.title === "Выход") {
       showLogoutAlert()
     }
+
+    if (item.routeName) router.push(item.routeName)
   }
 
   return (
@@ -77,7 +81,7 @@ const Profile = () => {
       <View style={styles.container}>
         <Header title='Профиль'
           style={{ marginVertical: spacingY._10 }}
-          leftIcon={< AntDesign name="arrowleft" size={24} color="black" />} />
+          leftIcon={<AntDesign name="arrowleft" size={24} color="black" />} />
 
         {/* userinfo */}
         <View style={styles.userInfo}>

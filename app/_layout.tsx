@@ -6,7 +6,9 @@ import { AuthProvider } from "@/contexts/authContext";
 const StackLayout = () => {
     return (
         <Stack screenOptions={{ headerShown: false }}>
-            <Slot/>
+            <Stack.Screen name="(modal)/profileModal"
+                options={{ presentation: "modal" }}
+            />
         </Stack>
     )
 }
