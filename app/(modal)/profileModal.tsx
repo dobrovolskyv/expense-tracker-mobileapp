@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, StyleSheet, ScrollView, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Image } from 'expo-image'
 
@@ -8,7 +8,7 @@ import ModalWrapper from '@/components/ModalWrapper'
 import Header from '@/components/Header'
 
 import AntDesign from '@expo/vector-icons/AntDesign';
-import { ScrollView } from 'react-native-reanimated/lib/typescript/Animated'
+
 import { getProfileImage } from '@/services/imageServices'
 import Typograph from '@/components/Typograph'
 import Input from '@/components/Input'

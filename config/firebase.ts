@@ -1,12 +1,42 @@
+// // Import the functions you need from the SDKs you need
+// import { initializeApp } from "firebase/app";
+// // TODO: Add SDKs for Firebase products that you want to use
+// // https://firebase.google.com/docs/web/setup#available-libraries
+// import { initializeAuth, /*getReactNativePersistence,*/ getAuth } from "firebase/auth"
+// import AsyncStorage from '@react-native-async-storage/async-storage';
+// import { getFirestore } from "firebase/firestore";
+
+
+
+// // Your web app's Firebase configuration
+// const firebaseConfig = {
+//     apiKey: process.env.EXPO_PUBLIC_API_KEY,
+//     authDomain: process.env.EXPO_PUBLIC_AUTH_DOMAIN,
+//     projectId: process.env.EXPO_PUBLIC_PROJECT_ID,
+//     storageBucket: process.env.EXPO_PUBLIC_STORAGE_BUCKET,
+//     messagingSenderId: process.env.EXPO_PUBLIC_MESSAGING_SENDER_ID,
+//     appId: process.env.EXPO_PUBLIC_APP_ID
+// };
+
+
+// // Initialize Firebase
+// const app = initializeApp(firebaseConfig);
+
+// //auth
+// // export const auth = getReactNativePersistence(app, {
+// //     persistence: getReactNativePersistence(AsyncStorage)
+// // })
+// export const auth = getAuth(app);
+
+// //db
+// export const firestore = getFirestore(app)
+
+// Import the functions you need from the SDKs you need
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-import { initializeAuth, /*getReactNativePersistence,*/ getAuth } from "firebase/auth"
+import { getReactNativePersistence, initializeAuth } from "firebase/auth";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getFirestore } from "firebase/firestore";
-
-
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -18,15 +48,14 @@ const firebaseConfig = {
     appId: process.env.EXPO_PUBLIC_APP_ID
 };
 
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-//auth
-// export const auth = getReactNativePersistence(app, {
-//     persistence: getReactNativePersistence(AsyncStorage)
-// })
-export const auth = getAuth(app);
+// Initialize Auth with React Native Persistence
+export const auth = initializeAuth(app, {
+    persistence: getReactNativePersistence(AsyncStorage),
+});
 
-//db
-export const firestore = getFirestore(app)
+// Initialize Firestore
+export const firestore = getFirestore(app);
+

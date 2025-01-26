@@ -81,7 +81,7 @@ const Profile = () => {
       <View style={styles.container}>
         <Header title='Профиль'
           style={{ marginVertical: spacingY._10 }}
-          leftIcon={<AntDesign name="arrowleft" size={24} color="black" />} />
+          leftIcon={<AntDesign name="arrowleft" size={24} color="white" />} />
 
         {/* userinfo */}
         <View style={styles.userInfo}>
@@ -121,7 +121,7 @@ const Profile = () => {
                   <Typograph size={16} style={{ flex: 1 }} fontWeight={"500"}>
                     {item.title}
                   </Typograph>
-                  <AntDesign name="arrowright" size={20} color="white" />
+                  <AntDesign name="arrowright" size={16} color="white" />
                 </TouchableOpacity>
               </Animated.View>
             )
