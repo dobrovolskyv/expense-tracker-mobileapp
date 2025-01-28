@@ -3,15 +3,17 @@ import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { colors, spacingY } from '@/constants/theme';
 import { verticalScale } from '@/utils/styling';
 
-import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
+import Ionicons from '@expo/vector-icons/Ionicons';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 export function CustomTabs({ state, descriptors, navigation }: BottomTabBarProps) {
 
 
     const tabbarIcons: any = {
         index: (isFocused: boolean) => (
-            <FontAwesome6 name="house-crack"
+            <FontAwesome5 name="home"
                 size={verticalScale(30)}
                 // fontWeight={isFocused ? "fill" : "regular"}
                 color={isFocused ? colors.primary : colors.neutral400}
@@ -19,21 +21,21 @@ export function CustomTabs({ state, descriptors, navigation }: BottomTabBarProps
             />
         ),
         statistics: (isFocused: boolean) => (
-            <FontAwesome6 name="house-crack"
+            <Ionicons name="stats-chart"
                 size={verticalScale(30)}
                 // fontWeight={isFocused ? "fill" : "regular"}
                 color={isFocused ? colors.primary : colors.neutral400}
             />
         ),
         wallet: (isFocused: boolean) => (
-            <FontAwesome6 name="house-crack"
+            <FontAwesome5 name="wallet"
                 size={verticalScale(30)}
                 // fontWeight={isFocused ? "fill" : "regular"}
                 color={isFocused ? colors.primary : colors.neutral400}
             />
         ),
         profile: (isFocused: boolean) => (
-            <FontAwesome6 name="house-crack"
+            <FontAwesome name="user"
                 size={verticalScale(30)}
                 // fontWeight={isFocused ? "fill" : "regular"}
                 color={isFocused ? colors.primary : colors.neutral400}
