@@ -1,13 +1,17 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import ScreenWrapper from '@/components/ScreenWrapper'
-import { colors, radius, spacingX, spacingY} from '@/constants/theme'
+import { colors, radius, spacingX, spacingY } from '@/constants/theme'
 import { verticalScale } from '@/utils/styling'
 
 const Wallet = () => {
   return (
-    <ScreenWrapper style={{backgroundColor: colors.black}}>
-      <Text>Wallet</Text>
+    <ScreenWrapper style={{ backgroundColor: colors.black }}>
+      <View style={styles.container}>
+        <View style={styles.balanceView}>
+
+        </View>
+      </View>
     </ScreenWrapper>
   )
 }
@@ -15,24 +19,24 @@ const Wallet = () => {
 export default Wallet
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 1,
     justifyContent: 'space-between'
   },
-  balanceView:{
+  balanceView: {
     height: verticalScale(160),
     backgroundColor: colors.black,
     justifyContent: 'center',
     alignItems: 'center'
   },
-  flexRow:{
+  flexRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: spacingY._10
   },
   wallets: {
-    flex:1,
+    flex: 1,
     backgroundColor: colors.neutral900,
     borderTopRightRadius: radius._30,
 
