@@ -13,28 +13,29 @@ const useFetchData = <T>(
     const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
-      if(!collectionName) return;
-      const collectionRef = collection(firestore, collectionName)
-      const q = query(collectionRef, ...constraints)
+        if (!collectionName) return;
+        const collectionRef = collection(firestore, collectionName)
+        const q = query(collectionRef, ...constraints)
 
-      const unsub = onSnapshot(q,(snapshot)=>{
-        const fetchedData = snapshot.docs.map((doc)=>{
-            return {
-                id: doc.id,
-                ...doc
-            }
-        }) as T[]
-      })
+        const unsub = onSnapshot(q, (snapshot) => {
+            const fetchedData = snapshot.docs.map((doc) => {
+                return {
+                    id: doc.id,
+                    ...doc.data()
+                }
+            }) as T[]
+            setData(fetchedData)
+            setLoading(false)
+        }, (err) => {
+            setError(err.message)
+            setLoading(false)
+        })
 
-      return ()=> unsub()
+        return () => unsub()
     }, [])
-    
 
-    return (
-        <View>
-        <Text>useFetchData </Text>
-        </View>
-    )
+
+    return { data, loading, error }
 }
 
 export default useFetchData
