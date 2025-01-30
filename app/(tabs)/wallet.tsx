@@ -25,7 +25,10 @@ const Wallet = () => {
   ])
 
   const getTotalBalance = () => {
-    return 2394
+    wallets.reduce((total, item) => {
+      total = total + (item.amount || 0)
+      return total
+    }, 0)
   }
   return (
     <ScreenWrapper style={{ backgroundColor: colors.black }}>
@@ -33,7 +36,7 @@ const Wallet = () => {
         {/* balance */}
         <View style={styles.balanceView}>
           <View style={{ alignItems: 'center' }}>
-            <Typograph size={45} fontWeight={"500"}> ${getTotalBalance().toFixed(2)}</Typograph>
+            <Typograph size={45} fontWeight={"500"}> ${getTotalBalance()}</Typograph>
             <Typograph size={16} color={colors.neutral300}>Общий баланс</Typograph>
           </View>
         </View>

@@ -2,12 +2,13 @@ import { Alert, StyleSheet, ScrollView, TouchableOpacity, View } from 'react-nat
 import React, { useEffect, useState } from 'react'
 import { Image } from 'expo-image'
 
-import { colors, spacingY } from '@/constants/theme'
+import { colors, spacingX, spacingY } from '@/constants/theme'
 import { scale, verticalScale } from '@/utils/styling'
 import ModalWrapper from '@/components/ModalWrapper'
 import Header from '@/components/Header'
 
 import AntDesign from '@expo/vector-icons/AntDesign';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
 import { getProfileImage } from '@/services/imageServices'
 import Typograph from '@/components/Typograph'
@@ -16,10 +17,10 @@ import { UserDataType, WalletType } from '@/types'
 import Button from '@/components/Button'
 import { useAuth } from '@/contexts/authContext'
 import { updateUser } from '@/services/userService'
-import { useRouter } from 'expo-router'
+import { useLocalSearchParams, useRouter } from 'expo-router'
 import * as ImagePicker from "expo-image-picker"
 import ImageUpload from '@/components/ImageUpload'
-import { createOrUpdateWallet } from '@/services/walletService'
+import { createOrUpdateWallet, deleteWallet } from '@/services/walletService'
 
 const WalletModal = () => {
     const { user, updateUserData } = useAuth()
@@ -31,6 +32,16 @@ const WalletModal = () => {
     const [loading, setLoading] = useState(false)
     const router = useRouter()
 
+    const oldWallet: { name: string, image: string, id: string } = useLocalSearchParams();
+
+    useEffect(() => {
+        if (oldWallet?.id) {
+            setWallet({
+                name: oldWallet?.name,
+                image: oldWallet?.image
+            })
+        }
+    }, [])
 
     const onSubmit = async () => {
         let { name, image } = wallet
@@ -44,6 +55,8 @@ const WalletModal = () => {
             image,
             uid: user?.uid
         }
+        if (oldWallet?.id) data.id = oldWallet?.id
+
         setLoading(true)
         const res = await createOrUpdateWallet(data)
         setLoading(false)
@@ -54,10 +67,40 @@ const WalletModal = () => {
             Alert.alert("wallet", res.msg)
         }
     }
+
+    const onDelete = async () => {
+        if(!oldWallet?.id) {
+            setLoading(true);
+            const res = await deleteWallet(oldWallet?.id)
+            setLoading(false);
+            if(res.success){
+                router.back()
+            }else {
+                Alert.alert("wallet", res.msg)
+            }
+        }
+    }
+    const shodDeleteAlert = () => {
+        Alert.alert(
+            'confirm',
+            "Уверенны что хотите это сделать? \nЭти действия удалять все транзакции этого кошелька",
+            [
+                {
+                    text: 'Отмена',
+                    style: 'cancel',
+                    onPress: () => console.log('Отмена удаления'),
+                },
+                {
+                    text: 'Удалить',
+                    onPress: () => onDelete(),
+                    style: 'destructive',
+                }
+            ])
+    }
     return (
         <ModalWrapper>
             <View style={styles.container}>
-                <Header title="Новый кошелек"
+                <Header title={oldWallet?.id ? "Обновить кошелек" : "Новый кошелек"}
                     leftIcon={<AntDesign name="arrowleft" size={18} color="white" />}
                     style={{ marginBottom: spacingY._10 }}
                 />
@@ -91,8 +134,22 @@ const WalletModal = () => {
             </View>
 
             <View style={styles.footer}>
+                {
+                    oldWallet?.id && !loading && (
+                        <Button
+                            onPress={shodDeleteAlert}
+                            style={{
+                                backgroundColor: colors.rose,
+                                paddingHorizontal: spacingX._15
+                            }}>
+                            <FontAwesome5 name="trash" size={verticalScale(24)} color={colors.white} />
+                        </Button>
+                    )
+                }
                 <Button onPress={onSubmit} loading={loading} style={{ flex: 1 }}>
-                    <Typograph color={colors.black} fontWeight={700}>Обновить</Typograph>
+                    <Typograph color={colors.black} fontWeight={700}>
+                        {oldWallet?.id ? "Обновить кошелек" : "Новый кошелек"}
+                    </Typograph>
                 </Button>
             </View>
         </ModalWrapper>
