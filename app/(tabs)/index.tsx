@@ -11,6 +11,7 @@ import { verticalScale } from '@/utils/styling'
 
 import AntDesign from '@expo/vector-icons/AntDesign';
 import HomeCard from '@/components/HomeCard'
+import TransactionList from '@/components/TransactionList'
 
 
 const Home = () => {
@@ -40,6 +41,8 @@ const Home = () => {
                     <View>
                         <HomeCard />
                     </View>
+
+                    <TransactionList/>
                 </ScrollView>
             </View>
 
