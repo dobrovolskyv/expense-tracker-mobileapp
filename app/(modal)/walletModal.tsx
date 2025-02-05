@@ -33,6 +33,7 @@ const WalletModal = () => {
     const router = useRouter()
 
     const oldWallet: { name: string, image: string, id: string } = useLocalSearchParams();
+    console.log('old walelt', oldWallet)
 
     useEffect(() => {
         if (oldWallet?.id) {

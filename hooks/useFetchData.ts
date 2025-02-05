@@ -9,7 +9,7 @@ const useFetchData = <T>(
 ) => {
 
     const [data, setData] = useState<T[]>([])
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {

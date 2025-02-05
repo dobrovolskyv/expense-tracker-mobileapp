@@ -13,7 +13,7 @@ import { WalletType } from '@/types'
 import { orderBy, where } from 'firebase/firestore'
 import Loading from '@/components/Loading'
 
-import WalletItem from '@/components/WalletItem'
+import WalletItem from '@/components/WalletListItem'
 
 const Wallet = () => {
   const router = useRouter()
