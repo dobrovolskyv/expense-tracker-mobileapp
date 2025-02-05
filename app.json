@@ -9,7 +9,7 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "bundleIdentifier": "com.test.test",
+      "bundleIdentifier": "com.trackapp",
       "supportsTablet": true
     },
     "android": {
