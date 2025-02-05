@@ -83,7 +83,7 @@ export type TransactionType = {
 export type CategoryType = {
   label: string;
   value: string;
-  icon: Icon;
+  icon?: Icon;
   bgColor: string;
 };
 export type ExpenseCategoriesType = {

@@ -12,10 +12,15 @@ import { verticalScale } from '@/utils/styling'
 import AntDesign from '@expo/vector-icons/AntDesign';
 import HomeCard from '@/components/HomeCard'
 import TransactionList from '@/components/TransactionList'
+import { useRouter } from 'expo-router'
+
+
+
 
 
 const Home = () => {
     const { user } = useAuth()
+    const router = useRouter()
 
     // const handleLogout = async () => {
     //     await signOut(auth)
@@ -42,12 +47,16 @@ const Home = () => {
                         <HomeCard />
                     </View>
 
-                    <TransactionList 
-                    data={[]} 
-                    loading={false} 
-                    emptyListMessage='Транзакции еще не добавлены'
-                    title="Список транзакций" />
+                    <TransactionList
+                        data={[1,2,3]}
+                        loading={false}
+                        emptyListMessage='Транзакции еще не добавлены'
+                        title="Список транзакций" />
                 </ScrollView>
+
+                <Button style={styles.floatingButton} onPress={() => router.push('/(modal)/transactionModal')}>
+                    <AntDesign name="plus" color={colors.black} size={verticalScale(24)} />
+                </Button>
             </View>
 
         </ScreenWrapper>

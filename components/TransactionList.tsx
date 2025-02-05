@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 
 import { TransactionItemProps, TransactionListType } from '@/types'
@@ -7,6 +7,8 @@ import { colors, radius, spacingX, spacingY } from '@/constants/theme'
 import Typograph from './Typograph'
 import { FlashList } from "@shopify/flash-list"
 import Loading from './Loading'
+import { expenseCategories } from '@/constants/data'
+import Animated, { FadeInDown } from 'react-native-reanimated'
 
 const TransactionList = ({
     data,
@@ -64,10 +66,34 @@ const TransactionItem = ({
     index,
     handleClick
 }: TransactionItemProps) => {
+
+    let category = expenseCategories['utilities']
+    const IconComponent = category.icon
+
+   
     return (
-        <View>
-            <Typograph>Transaction item</Typograph>
-        </View>
+        <Animated.View entering={FadeInDown.delay(index * 80).springify().damping(14)}>
+            <TouchableOpacity style={styles.row} onPress={()=>handleClick(item)}>
+                <View style={[styles.icon, { backgroundColor: category.bgColor }]}>
+                    {IconComponent && (
+                        <IconComponent
+                            size={verticalScale(25)}
+                            color={colors.white}
+                        />
+                    )}
+                </View>
+
+                <View style={styles.categoryDate}>
+                    <Typograph size={17}>{category.label}</Typograph>
+                    <Typograph size={12} color={colors.neutral400} textProps={{ numberOfLines: 1 }}>paid wifi bill</Typograph>
+                </View>
+
+                <View style={styles.amountDate}>
+                    <Typograph fontWeight={"500"} color={colors.rose}>- $23</Typograph>
+                    <Typograph size={13} color={colors.neutral400}>23 янв</Typograph>
+                </View>
+            </TouchableOpacity>
+        </Animated.View>
     )
 }
 
