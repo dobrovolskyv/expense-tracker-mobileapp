@@ -42,7 +42,11 @@ const Home = () => {
                         <HomeCard />
                     </View>
 
-                    <TransactionList/>
+                    <TransactionList 
+                    data={[]} 
+                    loading={false} 
+                    emptyListMessage='Транзакции еще не добавлены'
+                    title="Список транзакций" />
                 </ScrollView>
             </View>
 
